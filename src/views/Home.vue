@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-container class="generator__container">
+    <b-container class="generator__container p-2">
       <div>
         <b-tabs content-class="mt-3">
           <b-tab title="Ранги модераторов" active>
@@ -14,8 +14,10 @@
           </b-tab>
           <b-tab title="Результат">
             <b-card class="mt-3" header="Результат">
-              <pre class="m-0">{{ commandString }}</pre>
+              <pre class="m-0 to_copy">{{ commandString }}</pre>
             </b-card>
+            <b-button class="mt-2 mb-2" type="copy" variant="success" v-on:click="copyToClipboard">Скопировать</b-button>
+            <p v-show="copied">Скопировано!</p>
           </b-tab>
         </b-tabs>
       </div>
@@ -36,7 +38,8 @@ export default {
   },
   data() {
     return {
-      finalData: []
+      finalData: [],
+      copied: false
     }
   },
   computed: {
@@ -63,6 +66,21 @@ export default {
   methods: {
     gatherData(data) {
       this.finalData.push(data);
+    },
+    copyToClipboard() {
+      let text = this.commandString;
+      let dummy = document.createElement("textarea");
+      document.body.appendChild(dummy);
+      dummy.value = text;
+      dummy.select();
+      const status = document.execCommand("copy");
+      document.body.removeChild(dummy);
+      if (status) {
+        this.copied = true;
+        setTimeout(() => {
+          this.copied = false;
+        }, 2000)
+      }
     }
   },
 }
