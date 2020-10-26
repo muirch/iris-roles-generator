@@ -1,8 +1,9 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <div>
+      <b-navbar variant="faded" type="light" class="text-center">
+        <b-navbar-brand tag="h1" class="m-auto">Помощник-генератор ролей</b-navbar-brand>
+      </b-navbar>
     </div>
     <router-view/>
   </div>
@@ -13,8 +14,16 @@
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
+}
+
+.input-group {
+  .input-group-prepend {
+    flex: 0 0 25%;
+  }
+  .input-group-text {
+    width: 100%;
+  }
 }
 
 #nav {
