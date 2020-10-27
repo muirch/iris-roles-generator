@@ -2,12 +2,25 @@
   <div id="app">
     <div>
       <b-navbar variant="faded" type="light" class="text-center">
-        <b-navbar-brand tag="h1" class="m-auto">Помощник-генератор ролей</b-navbar-brand>
+        <b-navbar-brand tag="h1" class="m-auto">Помощник-генератор ролей {{ version }}</b-navbar-brand>
       </b-navbar>
     </div>
     <router-view/>
   </div>
 </template>
+
+<script>
+import { version } from '../package.json';
+
+export default {
+  name: 'App',
+  data() {
+    return {
+      version
+    }
+  }
+}
+</script>
 
 <style lang="scss">
 #app {

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-form-group v-for="(item, i) in form" :key="i">
+    <b-form-group v-for="(item, i) in form" :key="i" v-show="show">
       <h4>Модератор {{ ranks[i] }} ранга</h4>
       <label>Введите название в разных падежах</label>
       <b-input-group class="mt-2" v-for="(item2, i2) in item" :key="i2" :prepend="cases[i2]">
@@ -11,7 +11,7 @@
       </b-input-group>
     </b-form-group>
 
-    <b-button type="reset" variant="danger">Сбросить</b-button>
+    <b-button type="reset" variant="danger" v-on:click="clear">Сбросить</b-button>
   </div>
 </template>
 
@@ -78,7 +78,24 @@ export default {
         instrumental: 'Творительный',
         dative: 'Дательный',
         plural: 'Множественное число'
+      },
+      show: true
+    }
+  },
+  methods: {
+    clear(evt) {
+      evt.preventDefault();
+      for (let i = 0; i <= 5; i++) {
+        this.form[i].nominative = '';
+        this.form[i].genitive = '';
+        this.form[i].instrumental = '';
+        this.form[i].dative = '';
+        this.form[i].plural = '';
       }
+      this.show = false
+      this.$nextTick(() => {
+        this.show = true
+      })
     }
   },
   mounted() {
